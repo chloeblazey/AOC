@@ -1,24 +1,19 @@
 # --- Day 2: Password Philosophy ---
-# -----        Part 1        -------
+# -----        Part 2        -------
 # given a rule and a password, returns true if pw is valid
 def processRule(rule):
-	position1 = int(rule.split('-')[0])
-	position2 = int(rule.split('-')[1])
+	position1 = int(rule.split('-')[0]) - 1
+	position2 = int(rule.split('-')[1]) - 1
 	return (position1, position2)
 
 def processChar(c):
 	return c[0]
 
 def isValid((rule, c, pw)):
-	(lo, hi) = processRule(rule)
+	(pos1, pos2) = processRule(rule)
 	c = processChar(c)
-	count = 0;
-	# count how many times ch appears in pw.
-	for char in pw:
-		if char == c:
-			count = count + 1
-	# if count is between the rule boundaries, return true.
-	if lo <= count <= hi: 
+	# if (pw[pos1] == c) XOR (pw[pos22] == c), return true.
+	if (pw[pos1] == c) != (pw[pos2] == c): 
 		return True
 	else: 
 		return False
